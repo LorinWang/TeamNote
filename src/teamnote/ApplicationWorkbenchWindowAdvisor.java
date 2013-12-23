@@ -1,4 +1,7 @@
 package teamnote;
+/*
+ * 对工作台窗口进行控制，包括状态栏、工具栏、窗口尺寸、标题等。
+ */
 
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.ui.application.ActionBarAdvisor;
