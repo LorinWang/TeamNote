@@ -12,17 +12,17 @@ public class Menu
 	private User menuOwner; // 目录所有者
 	private UserGroup menuGroup; // 目录所属组
 
-	private User modifyUser; // 目录修改者
+	private User menuModifier; // 目录属性修改者
 
-	private Set<Doc> docs = new HashSet<Doc>(); // 目录中文档
-	private Set<User> unfoldUsers = new HashSet<User>(); // 目录展开者
+	private Set<Doc> menuDocs = new HashSet<Doc>(); // 目录中文档
+	private Set<User> menuUnfoldUsers = new HashSet<User>(); // 目录展开者
 
 	public Menu()
 	{
 		super();
 	}
 
-	public Menu(long menuId, String menuName, String menuP, User menuOwner, UserGroup menuGroup, User modifyUser, Set<Doc> docs, Set<User> unfoldUsers)
+	public Menu(long menuId, String menuName, String menuP, User menuOwner, UserGroup menuGroup, User menuModifier, Set<Doc> menuDocs, Set<User> menuUnfoldUsers)
 	{
 		super();
 		this.menuId = menuId;
@@ -30,9 +30,9 @@ public class Menu
 		this.menuP = menuP;
 		this.menuOwner = menuOwner;
 		this.menuGroup = menuGroup;
-		this.modifyUser = modifyUser;
-		this.docs = docs;
-		this.unfoldUsers = unfoldUsers;
+		this.menuModifier = menuModifier;
+		this.menuDocs = menuDocs;
+		this.menuUnfoldUsers = menuUnfoldUsers;
 	}
 
 	public long getMenuId()
@@ -85,34 +85,34 @@ public class Menu
 		this.menuGroup = menuGroup;
 	}
 
-	public User getModifyUser()
+	public User getMenuModifier()
 	{
-		return modifyUser;
+		return menuModifier;
 	}
 
-	public void setModifyUser(User modifyUser)
+	public void setMenuModifier(User menuModifier)
 	{
-		this.modifyUser = modifyUser;
+		this.menuModifier = menuModifier;
 	}
 
-	public Set<Doc> getDocs()
+	public Set<Doc> getMenuDocs()
 	{
-		return docs;
+		return menuDocs;
 	}
 
-	public void setDocs(Set<Doc> docs)
+	public void setMenuDocs(Set<Doc> menuDocs)
 	{
-		this.docs = docs;
+		this.menuDocs = menuDocs;
 	}
 
-	public Set<User> getUnfoldUsers()
+	public Set<User> getMenuUnfoldUsers()
 	{
-		return unfoldUsers;
+		return menuUnfoldUsers;
 	}
 
-	public void setUnfoldUsers(Set<User> unfoldUsers)
+	public void setMenuUnfoldUsers(Set<User> menuUnfoldUsers)
 	{
-		this.unfoldUsers = unfoldUsers;
+		this.menuUnfoldUsers = menuUnfoldUsers;
 	}
 
 }

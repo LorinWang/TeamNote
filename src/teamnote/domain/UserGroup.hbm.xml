@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="teamnote.domain">
+
+	<class name="teamnote.domain.UserGroup" table="USERGROUP">
+		<id name="groupId" type="long">
+			<column name="GROUPID" />
+			<generator class="native" />
+		</id>
+		<property name="groupName" type="java.lang.String" not-null="true" unique="true">
+			<column name="GROUPNAME" />
+		</property>
+
+		<!-- 用户及用户组 多对多 -->
+		<set name="groupUsers" table="USER_USERGROUP">
+			<key>
+				<column name="GROUPID" />
+			</key>
+			<many-to-many class="teamnote.domain.User" column="USERID" />
+		</set>
+
+		<!-- 目录及所属组 -->
+		<set name="groupOwnedMenus" inverse="true">
+			<key>
+				<column name="MENUGROUPID" />
+			</key>
+			<one-to-many class="teamnote.domain.Menu" />
+		</set>
+
+		<!-- 文档及所属组 -->
+		<set name="groupOwnedDocs" inverse="true">
+			<key>
+				<column name="DOCGROUPID" />
+			</key>
+			<one-to-many class="teamnote.domain.Doc" />
+		</set>
+
+		<!-- 用户组及用户组管理员 -->
+		<many-to-one name="groupOwner" class="teamnote.domain.User">
+			<column name="GROUPOWNERID" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

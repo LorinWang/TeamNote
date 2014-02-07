@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="teamnote.domain">
+
+    <class name="teamnote.domain.Doc" table="DOC">
+        <id name="docId" type="long">
+            <column name="DOCID" />
+            <generator class="native" />
+        </id>
+        <property name="docName" type="java.lang.String" not-null="true" unique="true">
+            <column name="DOCNAME" />
+        </property>
+        <property name="docP" type="java.lang.String">
+            <column name="DOCP" />
+        </property>
+        <property name="docContent" type="java.lang.String">
+            <column name="DOCCONTENT" />
+        </property>
+        
+         <!-- 文档及所有者 -->
+        <many-to-one name="docOwner" class="teamnote.domain.User">
+            <column name="DOCOWNERID" />
+        </many-to-one>
+        
+        <!-- 文档及所属组 -->
+        <many-to-one name="docGroup" class="teamnote.domain.UserGroup">
+            <column name="DOCGROUPID" />
+        </many-to-one>
+        
+        <!-- 用户写文档 -->
+        <many-to-one name="docEditor" class="teamnote.domain.User">
+            <column name="DOCEDITORID" />
+        </many-to-one>
+        
+        <!-- 用户改文档 -->
+        <many-to-one name="docModifier" class="teamnote.domain.User">
+            <column name="DOCMODIFIERID" />
+        </many-to-one>
+        
+        <!-- 用户读文档 多对多-->
+        <set name="docReadUsers" table="USER_DOCS_READ">
+            <key>
+                <column name="DOCID" />
+            </key>
+            <many-to-many class="teamnote.domain.User" column="USERID"/>
+        </set>
+        
+        <!-- 目录及文档 -->
+        <many-to-one name="docMenu" class="teamnote.domain.Menu">
+            <column name="DOCMENUID" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

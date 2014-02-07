@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="teamnote.domain">
+
+    <class name="teamnote.domain.Menu" table="MENU">
+        <id name="menuId" type="long">
+            <column name="MENUID" />
+            <generator class="native" />
+        </id>
+        <property name="menuName" type="java.lang.String" not-null="true" unique="true">
+            <column name="MENUNAME" />
+        </property>
+        <property name="menuP" type="java.lang.String">
+            <column name="MENUP" />
+        </property>
+        
+        <!-- 目录及所有者 -->
+        <many-to-one name="menuOwner" class="teamnote.domain.User">
+            <column name="MENUOWNERID" />
+        </many-to-one>
+        
+        <!-- 目录及所属组 -->
+        <many-to-one name="menuGroup" class="teamnote.domain.UserGroup">
+            <column name="MENUGROUPID" />
+        </many-to-one>
+        
+         <!-- 目录及修改者 -->
+        <many-to-one name="menuModifier" class="teamnote.domain.User">
+            <column name="MENUMODIFIERID" />
+        </many-to-one>
+        
+        <!-- 目录及文档 -->
+        <set name="menuDocs" inverse="true">
+            <key>
+                <column name="DOCMENUID" />
+            </key>
+            <one-to-many class="teamnote.domain.Doc" />
+        </set>
+        
+        <!-- 目录用户展开表 多对多 -->
+        <set name="menuUnfoldUsers" table="MENU_USER_UNFOLD">
+            <key>
+                <column name="MENUID" />
+            </key>
+            <many-to-many class="teamnote.domain.User" column="USERID"/>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="teamnote.domain">
+
+    <class name="teamnote.domain.User" table="USER">
+        <id name="userId" type="long">
+            <column name="USERID" />
+            <generator class="native" />
+        </id>
+        <property name="userName" type="java.lang.String" not-null="true" unique="true">
+            <column name="USERNAME" />
+        </property>
+        <property name="userPassword" type="java.lang.String" not-null="true">
+            <column name="USERPASSWORD" />
+        </property>
+        <property name="userIsAdmin" type="boolean">
+            <column name="USERISADMIN" />
+        </property>
+        <property name="userIsLogged" type="boolean">
+            <column name="USERISLOGGED" />
+        </property>
+        
+        <!-- 目录及修改者 -->
+        <set name="userModifiedMenus" inverse="true">
+            <key>
+                <column name="MENUMODIFIERID" />
+            </key>
+            <one-to-many class="teamnote.domain.Menu" />
+        </set>
+        
+        <!-- 目录用户展开表 多对多 -->
+        <set name="userUnfoldMenus" table="MENU_USER_UNFOLD">
+            <key>
+                <column name="USERID" />
+            </key>
+            <many-to-many class="teamnote.domain.Menu" column="MENUID"/>
+        </set>
+        
+        <!-- 目录及所有者 -->
+        <set name="userOwnedMenus" inverse="true">
+            <key>
+                <column name="MENUOWNERID" />
+            </key>
+            <one-to-many class="teamnote.domain.Menu" />
+        </set>
+
+		<!-- 文档及所有者 -->
+        <set name="userOwnedDocs" inverse="true">
+            <key>
+                <column name="DOCOWNERID" />
+            </key>
+            <one-to-many class="teamnote.domain.Doc" />
+        </set>
+        
+        <!-- 用户写文档 -->
+        <set name="userEditedDocs" inverse="true">
+            <key>
+                <column name="DOCEDITORID" />
+            </key>
+            <one-to-many class="teamnote.domain.Doc" />
+        </set>
+        
+        <!-- 用户改文档 -->
+        <set name="userModifiedDocs" inverse="true">
+            <key>
+                <column name="DOCMODIFIERID" />
+            </key>
+            <one-to-many class="teamnote.domain.Doc" />
+        </set>
+        
+        <!-- 用户读文档 多对多-->
+        <set name="userReadDocs" table="USER_DOCS_READ">
+            <key>
+                <column name="USERID" />
+            </key>
+            <many-to-many class="teamnote.domain.Doc" column="DOCID"/>
+        </set>
+        
+        <!-- 用户及用户组 多对多 -->
+        <set name="userGroup" table="USER_USERGROUP">
+            <key>
+                <column name="USERID" />
+            </key>
+            <many-to-many class="teamnote.domain.UserGroup" column="GROUPID"/>
+        </set>
+        
+        <!-- 用户组及用户组管理员 -->
+        <set name="userOwnedGroups" inverse="true">
+            <key>
+                <column name="GROUPOWNERID" />
+            </key>
+            <one-to-many class="teamnote.domain.UserGroup" />
+        </set>
+        
+    </class>
+</hibernate-mapping>
