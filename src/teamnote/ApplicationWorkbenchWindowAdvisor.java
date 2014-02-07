@@ -1,7 +1,5 @@
 package teamnote;
-/*
- * 对工作台窗口进行控制，包括状态栏、工具栏、窗口尺寸、标题等。
- */
+
 
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.ui.application.ActionBarAdvisor;
@@ -25,7 +23,7 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor
 	public void preWindowOpen()
 	{
 		IWorkbenchWindowConfigurer configurer = getWindowConfigurer();
-		configurer.setInitialSize(new Point(400, 300));
+		configurer.setInitialSize(new Point(300, 200));
 		configurer.setShowCoolBar(false);
 		configurer.setShowStatusLine(false);
 		configurer.setTitle("TeamNote");

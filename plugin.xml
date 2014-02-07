@@ -33,5 +33,15 @@
          </menu>
       </menuContribution>
    </extension>
+   
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="teamnote.views.NavigatorView"
+            id="TeamNote.views.NavigatorView"
+            name="Navigator">
+      </view>
+   </extension>
+   
 
 </plugin>

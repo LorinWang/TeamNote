@@ -8,7 +8,13 @@ public class Perspective implements IPerspectiveFactory
 
 	public void createInitialLayout(IPageLayout layout)
 	{
-		layout.setEditorAreaVisible(false);
+		String navigatorViewID="TeamNote.views.NavigatorView";
+		
+		String editorArea=layout.getEditorArea();
+		
+		layout.addView(navigatorViewID, IPageLayout.LEFT, 0.3f, editorArea);
+		
+		layout.setEditorAreaVisible(true);
 		layout.setFixed(true);
 
 	}
