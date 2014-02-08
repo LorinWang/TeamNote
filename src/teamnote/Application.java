@@ -1,7 +1,5 @@
 package teamnote;
-/*
- * 主程序类
- */
+
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 import org.eclipse.swt.widgets.Display;

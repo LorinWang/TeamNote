@@ -1,7 +1,5 @@
 package teamnote;
-/*
- * 创建菜单、工具栏、状态栏等
- */
+
 
 import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;

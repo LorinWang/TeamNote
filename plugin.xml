@@ -42,6 +42,15 @@
             name="Navigator">
       </view>
    </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="teamnote.editors.DocEditor"
+            default="false"
+            id="TeamNote.Editors.DocEditor"
+            name="文本编辑器">
+      </editor>
+   </extension>
    
 
 </plugin>
