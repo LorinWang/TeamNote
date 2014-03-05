@@ -188,4 +188,28 @@ public class User
 		this.userOwnedGroups = userOwnedGroups;
 	}
 
+	@Override
+	public int hashCode()
+	{
+		return userName.hashCode()+ userPassword.hashCode() * 17;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+		{
+			return true;
+		}
+		if (obj != null &&
+			obj.getClass() == User.class)
+		{
+			User user = (User)obj;
+			return this.getUserName().equals(user.getUserName());
+		}
+		return false;
+	}
+	
+	
+
 }

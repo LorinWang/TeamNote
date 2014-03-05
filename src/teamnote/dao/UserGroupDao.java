@@ -9,15 +9,16 @@ import teamnote.domain.UserGroup;
 
 public interface UserGroupDao
 {
-	UserGroup findById(long id);
-
 	UserGroup findByName(String name);
+	/*UserGroup findById(long id);
+
+	
 
 	UserGroup findByMenuOwner(Menu menu);
 
 	UserGroup findByDocOwner(Doc doc);
 
-	UserGroup findByGroupOwner(User user);
+	List<UserGroup> findByGroupOwner(User user);
 
 	long save(UserGroup userGroup);
 
@@ -27,5 +28,5 @@ public interface UserGroupDao
 
 	List<UserGroup> findAll();
 
-	List<UserGroup> findByUser(User user);
+	List<UserGroup> findByUser(User user);*/
 }

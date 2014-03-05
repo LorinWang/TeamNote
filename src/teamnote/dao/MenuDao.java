@@ -9,19 +9,22 @@ import teamnote.domain.UserGroup;
 
 public interface MenuDao
 {
-	Menu findById(long id);
-
 	Menu findByName(String name);
+	
+	long save(Menu menu);
+	/*Menu findById(long id);
+
+	
 
 	Menu findByDoc(Doc doc);
 
-	long save(Menu menu);
+	
 
 	void update(Menu menu);
 
 	void delete(Menu menu);
 
-	List<Menu> findAll();
+	
 
 	List<Menu> findByUnfoldUser(User user);
 
@@ -30,5 +33,6 @@ public interface MenuDao
 	List<Menu> findByOwner(User owner);
 
 	List<Menu> findByGroup(UserGroup userGroup);
-
+*/
+	List<Menu> findAll();
 }

@@ -9,25 +9,32 @@ import teamnote.domain.UserGroup;
 
 public interface DocDao
 {
-	Doc findById(long id);
+	long save(Doc doc);
+	Doc findByName(String name);
+	void delete(Doc doc);
+	/*Doc findById(long id);
 
 	Doc findByName(String name);
 
-	long save(Doc doc);
+	
 
 	void update(Doc doc);
 
-	void delete(Doc doc);
+	
 
 	List<Doc> findAll();
-	
+
 	List<Doc> findByMenu(Menu menu);
+
 	List<Doc> findByOwner(User owner);
+
 	List<Doc> findByGroup(UserGroup userGroup);
-	
+
 	List<Doc> findByReader(User reader);
+
 	List<Doc> findByWriter(User writer);
+
 	List<Doc> findByModifier(User modifier);
-	
-	
+*/
+
 }
