@@ -13,6 +13,7 @@ public interface MenuDao
 	
 	long save(Menu menu);
 	void update(Menu menu);
+	void delete(Menu menu);
 	/*Menu findById(long id);
 
 	
@@ -23,7 +24,7 @@ public interface MenuDao
 
 	
 
-	void delete(Menu menu);
+	
 
 	
 

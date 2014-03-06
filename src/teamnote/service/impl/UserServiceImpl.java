@@ -438,7 +438,7 @@ public class UserServiceImpl implements UserService
 				docDao.save(doc);
 				if (doc.getDocModifier() == user)
 				{
-					System.out.println(user.getUserModifiedDocs());
+					//System.out.println(user.getUserModifiedDocs());
 					if (docOwner != doc.getDocOwner())
 					{
 						doc.setDocOwner(docOwner);
@@ -462,7 +462,7 @@ public class UserServiceImpl implements UserService
 					doc.setDocModifier(null);
 					docDao.save(doc);
 					user.getUserModifiedDocs().remove(doc);
-					System.out.println(user.getUserModifiedDocs());
+					//System.out.println(user.getUserModifiedDocs());
 					return 1;
 				}
 				return -4;

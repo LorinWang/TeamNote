@@ -20,7 +20,7 @@ public class MenuDaoHibernate implements MenuDao
 		Session sess = HibernateUtil.currentSession();
 		Transaction tx = sess.beginTransaction();
 		List menus = sess.createQuery("from Menu").list();
-//		sess.flush();
+		// sess.flush();
 		tx.commit();
 		// HibernateUtil.closeSession();
 		if (menus.size() > 0)
@@ -39,7 +39,7 @@ public class MenuDaoHibernate implements MenuDao
 		Session sess = HibernateUtil.currentSession();
 		Transaction tx = sess.beginTransaction();
 		List<Menu> menus = sess.createQuery("from Menu where menuName=:name").setString("name", name).list();
-//		sess.flush();
+		// sess.flush();
 		tx.commit();
 		// HibernateUtil.closeSession();
 		if (menus.size() > 0)
@@ -58,7 +58,7 @@ public class MenuDaoHibernate implements MenuDao
 		Session sess = HibernateUtil.currentSession();
 		Transaction tx = sess.beginTransaction();
 		Object result = sess.save(menu);
-//		sess.flush();
+		// sess.flush();
 		tx.commit();
 		return (long) result;
 	}
@@ -69,6 +69,16 @@ public class MenuDaoHibernate implements MenuDao
 		Session sess = HibernateUtil.currentSession();
 		Transaction tx = sess.beginTransaction();
 		sess.update(menu);
+		tx.commit();
+	}
+
+	@Override
+	public void delete(Menu menu)
+	{
+		Session sess = HibernateUtil.currentSession();
+		Transaction tx = sess.beginTransaction();
+		sess.delete(menu);
+		sess.flush();
 		tx.commit();
 	}
 	/*

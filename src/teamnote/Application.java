@@ -12,10 +12,12 @@ import teamnote.action.CloseDocAction;
 import teamnote.action.CreateDocAction;
 import teamnote.action.CreateMenuAction;
 import teamnote.action.DeleteDocAction;
+import teamnote.action.DeleteMenuAction;
 import teamnote.action.EditDocAction;
 import teamnote.action.FoldMenuAction;
 import teamnote.action.LoginAction;
 import teamnote.action.ModifyDocAction;
+import teamnote.action.ModifyMenuAction;
 import teamnote.action.UnfoldMenuAction;
 import teamnote.action.ShowMenusAction;
 import teamnote.action.OpenDocAction;
@@ -106,6 +108,11 @@ public class Application implements IApplication
 			ModifyDocAction modifyDocAction=new ModifyDocAction();
 			
 			DeleteDocAction deleteDocAction=new DeleteDocAction();
+			
+			DeleteMenuAction deleteMenuAction=new DeleteMenuAction();
+			
+			ModifyMenuAction modifyMenuAction=new ModifyMenuAction();
+			
 			try
 			{
 				//用户登录
@@ -136,6 +143,10 @@ public class Application implements IApplication
 				//System.out.println(modifyDocAction.execute(user.getUserName(), 4, "doc4", "rwxrwxrwx", "admin", "group1", "temp"));
 				//删除文档
 				//System.out.println(deleteDocAction.execute(user.getUserName(), "temp", 4));
+				//删除目录
+				//System.out.println(deleteMenuAction.execute(user.getUserName(), "menu1"));
+				//修改目录属性
+				System.out.println(modifyMenuAction.execute(user.getUserName(), "menu1", "menunew1","---------", "a1", null));
 			}
 			catch (Exception e)
 			{
