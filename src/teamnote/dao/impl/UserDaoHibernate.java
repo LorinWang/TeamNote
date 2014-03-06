@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
 import teamnote.dao.UserDao;
 import teamnote.domain.Doc;
 import teamnote.domain.Menu;
@@ -20,9 +21,10 @@ public class UserDaoHibernate implements UserDao
 		Session sess =HibernateUtil.currentSession();
 		Transaction tx=sess.beginTransaction();
 		List users=sess.createQuery("from User where userId=:id").setString("id", String.valueOf(id)).list();
+//		sess.flush();
 		tx.commit();
 		//HibernateUtil.closeSession();
-		if(users.size()>=0)
+		if(users.size()>0)
 		{
 			return (User) users.get(0);
 		}
@@ -35,9 +37,10 @@ public class UserDaoHibernate implements UserDao
 		Session sess =HibernateUtil.currentSession();
 		Transaction tx=sess.beginTransaction();
 		List users=sess.createQuery("from User where userName=:name").setString("name", name).list();
+//		sess.flush();
 		tx.commit();
 		//HibernateUtil.closeSession();
-		if(users.size()>=0)
+		if(users.size()>0)
 		{
 			return (User) users.get(0);
 		}
@@ -51,14 +54,36 @@ public class UserDaoHibernate implements UserDao
 		Session sess =HibernateUtil.currentSession();
 		Transaction tx=sess.beginTransaction();
 		List users=sess.createQuery("from User where userName=:name and userPassword=:password").setString("name", user.getUserName()).setString("password", user.getUserPassword()).list();
+//		sess.flush();
 		tx.commit();
 		//HibernateUtil.closeSession();
-		if(users.size()>=0)
+		if(users.size()>0)
 		{
 			return (User) users.get(0);
 		}
 		else return null;
 		
+	}
+	
+	@Override
+	public void update(User user)
+	{
+		Session sess =HibernateUtil.currentSession();
+		Transaction tx=sess.beginTransaction();
+		sess.update(user);
+//		sess.flush();
+		tx.commit();
+	}
+	
+	@Override
+	public long save(User user)
+	{
+		Session sess = HibernateUtil.currentSession();
+		Transaction tx = sess.beginTransaction();
+		Object result = sess.save(user);
+//		sess.flush();
+		tx.commit();
+		return (long) result;
 	}
 /*
 	@Override
@@ -127,17 +152,9 @@ public class UserDaoHibernate implements UserDao
 		return null;
 	}
 
-	@Override
-	public long save(User user)
-	{
-		return (Long) getHibernateTemplate().save(user);
-	}
+	
 
-	@Override
-	public void update(User user)
-	{
-		getHibernateTemplate().update(user);
-	}
+	
 
 	@Override
 	public void delete(User user)

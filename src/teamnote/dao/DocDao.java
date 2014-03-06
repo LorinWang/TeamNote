@@ -9,16 +9,22 @@ import teamnote.domain.UserGroup;
 
 public interface DocDao
 {
-	long save(Doc doc);
+	Doc findById(long id);
+	
 	Doc findByName(String name);
+	
+	long save(Doc doc);
+	
 	void delete(Doc doc);
+	
+	void update(Doc doc);
 	/*Doc findById(long id);
 
 	Doc findByName(String name);
 
 	
 
-	void update(Doc doc);
+	
 
 	
 

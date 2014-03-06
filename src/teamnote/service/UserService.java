@@ -30,15 +30,16 @@ public interface UserService
 	//新建文档
 	long createDoc(String userName,String docName,String menuName,String docContent);
 	//删除文档
-	int deleteDoc(String userName,String menuName,String docName);
+	int deleteDoc(String userName,String menuName,long docId);
 	//显示文档内容
-	String openDoc(String userName,String docName);
+	String openDoc(String userName,long docId);
 	//关闭文档内容
-	int closeDoc(String userName,String docName);
+	int closeDoc(String userName,long docId);
 	//修改文档内容
-	int editDoc(String userName,String docName,String docContent);
+	int editDoc(String userName,long docId,String docContent);
 	//修改文档属性
-	int modifyDoc(String userName,String docName,String docNewName,String docP,String docOwnerName,String docGroupName,String docMenuName);
+	int modifyDoc(String userName,long docId,String docNewName,String docP,String docOwnerName,String docGroupName,String docMenuName);
+	//删除文档
 	
 	
 }

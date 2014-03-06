@@ -15,6 +15,9 @@ public interface UserDao
 
 	User findByNameAndPass(User user);
 
+	void update(User user);
+	
+	long save(User user);
 	/*User findByMenuOwner(Menu menu);
 
 	User findByDocOwner(Doc doc);
@@ -29,7 +32,7 @@ public interface UserDao
 
 	long save(User user);
 
-	void update(User user);
+	
 
 	void delete(User user);
 

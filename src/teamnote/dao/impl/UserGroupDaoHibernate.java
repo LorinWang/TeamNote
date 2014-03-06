@@ -23,7 +23,7 @@ public class UserGroupDaoHibernate implements UserGroupDao
 		List userGroups = sess.createQuery("from UserGroup where groupName=:name").setString("name", name).list();
 		tx.commit();
 		// HibernateUtil.closeSession();
-		if (userGroups.size() >= 0)
+		if (userGroups.size() > 0)
 		{
 			return (UserGroup) userGroups.get(0);
 		}

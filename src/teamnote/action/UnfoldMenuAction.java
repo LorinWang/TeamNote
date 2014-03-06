@@ -4,7 +4,7 @@ import java.util.Set;
 
 import teamnote.domain.Doc;
 
-public class ShowDocAction extends UserBaseAction
+public class UnfoldMenuAction extends UserBaseAction
 {
 	public String execute(String userName,String menuName) throws Exception
 	{
@@ -13,12 +13,12 @@ public class ShowDocAction extends UserBaseAction
 		{
 			for (Doc doc : docs)
 			{
-				System.out.println(doc.getDocName());
+				System.out.println(menuName+"目录里的文件有:"+doc.getDocName());
 
 			}
-			return "show docs ok";
+			return "展开目录成功"+menuName;
 
 		}
-		return "show docs error";
+		return "展开目录失败"+menuName;
 	}
 }

@@ -14,10 +14,9 @@ import teamnote.service.AdminService;
 
 public class AdminServiceImpl implements AdminService
 {
-	
 
 	private static final String defaultMenuP = "rwxrwxrwx";
-	
+
 	// ///////////////for RCP
 	private DocDao docDao = new DocDaoHibernate();
 	private MenuDao menuDao = new MenuDaoHibernate();
@@ -71,15 +70,18 @@ public class AdminServiceImpl implements AdminService
 	public long createMenu(String userName, String menuName)
 	{
 		User user = userDao.findByName(userName);
-		if (user.isUserIsAdmin())
+		Menu menu = menuDao.findByName(menuName);
+		if (user == null || menu != null)
 		{
-			Menu menu = new Menu();
-			menu.setMenuName(menuName);
-			menu.setMenuOwner(user);
-			menu.setMenuP(defaultMenuP);
-			return menuDao.save(menu);
+			return -1;
 		}
-		return 0;
+
+		menu = new Menu();
+		menu.setMenuName(menuName);
+		menu.setMenuOwner(user);
+		menu.setMenuP(defaultMenuP);
+		return menuDao.save(menu);
+
 	}
 
 }

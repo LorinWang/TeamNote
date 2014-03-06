@@ -137,8 +137,9 @@ public class UserServiceImpl implements UserService
 			return null;
 		}
 		menu.getMenuUnfoldUsers().add(user);
-		user.getUserUnfoldMenus().add(menu);
+		menuDao.save(menu);
 		return menu.getMenuDocs();
+		
 	}
 
 	@Override
@@ -169,58 +170,59 @@ public class UserServiceImpl implements UserService
 		Menu menu = menuDao.findByName(menuName);
 		if (user == null || docName == null)
 		{
-			return 0;
+			return -1;
 		}
 		if (menuName.equals("temp") || menu == null)
 		{
 			menu = menuDao.findByName("temp");
 		}
-		// ºÏ≤‚Œƒµµ÷ÿ∏¥
-		Doc tempDoc = docDao.findByName(docName);
-		if (tempDoc != null && tempDoc.getDocMenu() == menu)
-		{
-			return 1;
-		}
-		Doc doc = new Doc();
-		doc.setDocName(docName);
-		doc.setDocContent(docContent);
-		doc.setDocGroup(null);
-		doc.setDocEditor(null);
-		doc.setDocModifier(null);
-		doc.setDocOwner(user);
-		doc.setDocMenu(menu);
-		doc.setDocP(DEFAULT_DOCP);
 		if (judgeMenuP(user, menu, 'w'))
 		{
+			// ºÏ≤‚Œƒµµ÷ÿ∏¥
+			Doc tempDoc = docDao.findByName(docName);
+			if (tempDoc != null && tempDoc.getDocMenu() == menu)
+			{
+				return -3;
+			}
+			Doc doc = new Doc();
+			doc.setDocName(docName);
+			doc.setDocContent(docContent);
+			doc.setDocGroup(null);
+			doc.setDocEditor(null);
+			doc.setDocModifier(null);
+			doc.setDocOwner(user);
+			doc.setDocMenu(menu);
+			doc.setDocP(DEFAULT_DOCP);
 			docDao.save(doc);
-			return 2;
+			return doc.getDocId();
+
 		}
-		return 3;
+		return -2;
 	}
 
 	@Override
-	public int deleteDoc(String userName, String menuName, String docName)
+	public int deleteDoc(String userName, String menuName, long docId)
 	{
 		User user = userDao.findByName(userName);
 		Menu menu = menuDao.findByName(menuName);
-		Doc doc = docDao.findByName(docName);
+		Doc doc = docDao.findById(docId);
 		if (user == null || menu == null || doc == null)
 		{
-			return 0;
+			return -1;
 		}
 		if (judgeMenuP(user, menu, 'x') && judgeDocP(user, doc, 'x'))
 		{
 			if (doc.getDocModifier() != null || doc.getDocEditor() != null)
 			{
-				return 2;
+				return -3;
 			}
 			else
 			{
 				docDao.delete(doc);
-				return 3;
+				return 1;
 			}
 		}
-		return 1;
+		return -2;
 	}
 
 	public static boolean judgeMenuP(User user, Menu menu, char p)
@@ -332,100 +334,111 @@ public class UserServiceImpl implements UserService
 	}
 
 	@Override
-	public String openDoc(String userName, String docName)
+	public String openDoc(String userName, long docId)
 	{
 		User user = userDao.findByName(userName);
-		Doc doc = docDao.findByName(docName);
+		Doc doc = docDao.findById(docId);
 		if (user == null || doc == null)
 		{
-			return "0";
+			return "-1";
 		}
 		if (judgeDocP(user, doc, 'r'))
 		{
 			if (user.getUserReadDocs().contains(doc) || doc.getDocReadUsers().contains(user))
 			{
-				return "2";
+				return "-3";
 			}
 			else
 			{
 				user.getUserReadDocs().add(doc);
-				doc.getDocReadUsers().add(user);
+				userDao.save(user);
 				return doc.getDocContent();
 			}
 
 		}
-		return "1";
+		return "-2";
 	}
 
 	@Override
-	public int closeDoc(String userName, String docName)
+	public int closeDoc(String userName, long docId)
 	{
 		User user = userDao.findByName(userName);
-		Doc doc = docDao.findByName(docName);
+		Doc doc = docDao.findById(docId);
 		if (user == null || doc == null)
 		{
-			return 0;
+			return -1;
 		}
 		if (user.getUserReadDocs().contains(doc) && doc.getDocReadUsers().contains(user))
 		{
 			user.getUserReadDocs().remove(doc);
-			doc.getDocReadUsers().remove(user);
-			return 2;
+			userDao.save(user);
+			return 1;
 		}
-		return 1;
+		return -2;
 	}
 
 	@Override
-	public int editDoc(String userName, String docName, String docContent)
+	public int editDoc(String userName, long docId, String docContent)
 	{
 		User user = userDao.findByName(userName);
-		Doc doc = docDao.findByName(docName);
+		Doc doc = docDao.findById(docId);
 		if (user == null || doc == null)
 		{
-			return 0;
+			return -1;
 		}
 		if (judgeDocP(user, doc, 'w'))
 		{
 			if (doc.getDocEditor() == null)
 			{
 				doc.setDocEditor(user);
-				if(doc.getDocEditor()==user)
+				docDao.save(doc);
+				if (doc.getDocEditor() == user)
 				{
-					user.getUserEditedDocs().add(doc);
+					//System.out.println(user.getUserEditedDocs());
 					doc.setDocContent(docContent);
-					doc.setDocEditor(null);
+					doc.setDocEditor(null);	
+					docDao.save(doc);
 					user.getUserEditedDocs().remove(doc);
+					//System.out.println(user.getUserEditedDocs());
+					return 1;
 				}
+				return -3;
 			}
-			return 2;
+			return -3;
 		}
-		return 1;
+		return -2;
 	}
 
 	@Override
-	public int modifyDoc(String userName, String docName, String docNewName, String docP, String docOwnerName, String docGroupName, String docMenuName)
+	public int modifyDoc(String userName, long docId, String docNewName, String docP, String docOwnerName, String docGroupName, String docMenuName)
 	{
 		User user = userDao.findByName(userName);
-		Doc doc = docDao.findByName(docName);
-		if (user == null || doc == null)
-		{
-			return 0;
-		}
-		if (!(docNewName.equals(docName)) && docDao.findByName(docNewName) != null)
-		{
-			return 1;
-		}
+		Doc doc = docDao.findById(docId);
 		User docOwner = userDao.findByName(docOwnerName);
 		UserGroup docGroup = userGroupDao.findByName(docGroupName);
 		Menu docMenu = menuDao.findByName(docMenuName);
+		if (user == null || doc == null||docMenu==null)
+		{
+			return -1;
+		}
+		
+		Doc tempDoc=docDao.findByName(docNewName);
+		if (!(docNewName.equals(doc.getDocName())) && tempDoc!= null&&tempDoc.getDocMenu()==doc.getDocMenu())
+		{
+			return -2;
+		}
+		
+		
 
 		if (judgeDocP(user, doc, 'x'))
 		{
 			if (doc.getDocModifier() == null)
 			{
 				doc.setDocModifier(user);
+				docDao.save(doc);
 				if (doc.getDocModifier() == user)
 				{
+					System.out.println(user.getUserModifiedDocs());
 					if (docOwner != doc.getDocOwner())
 					{
 						doc.setDocOwner(docOwner);
@@ -442,14 +455,21 @@ public class UserServiceImpl implements UserService
 					{
 						doc.setDocP(docP);
 					}
+					if (doc.getDocMenu()!=docMenu)
+					{
+						doc.setDocMenu(docMenu);
+					}
 					doc.setDocModifier(null);
-					return 4;
+					docDao.save(doc);
+					user.getUserModifiedDocs().remove(doc);
+					System.out.println(user.getUserModifiedDocs());
+					return 1;
 				}
-				return 3;
+				return -4;
 			}
-			return 3;
+			return -4;
 		}
-		return 2;
+		return -3;
 
 	}
 }

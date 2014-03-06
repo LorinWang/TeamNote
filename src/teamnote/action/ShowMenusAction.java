@@ -5,7 +5,7 @@ import java.util.List;
 import teamnote.domain.Menu;
 import teamnote.domain.User;
 
-public class ShowMenuAction extends UserBaseAction
+public class ShowMenusAction extends UserBaseAction
 {
 
 	public String execute(String userName) throws Exception

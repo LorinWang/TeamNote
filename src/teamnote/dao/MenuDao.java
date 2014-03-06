@@ -12,6 +12,7 @@ public interface MenuDao
 	Menu findByName(String name);
 	
 	long save(Menu menu);
+	void update(Menu menu);
 	/*Menu findById(long id);
 
 	
@@ -20,7 +21,7 @@ public interface MenuDao
 
 	
 
-	void update(Menu menu);
+	
 
 	void delete(Menu menu);
 

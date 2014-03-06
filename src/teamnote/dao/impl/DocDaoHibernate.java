@@ -23,6 +23,25 @@ public class DocDaoHibernate implements DocDao
 	}
 
 	@Override
+	public Doc findById(long id)
+	{
+
+		Session sess = HibernateUtil.currentSession();
+		Transaction tx = sess.beginTransaction();
+		List<Doc> docs = sess.createQuery("from Doc where docId=:id").setLong("id", id).list();
+		tx.commit();
+		// HibernateUtil.closeSession();
+		if (docs.size() > 0)
+		{
+			return (Doc) docs.get(0);
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+	@Override
 	public Doc findByName(String name)
 	{
 		Session sess = HibernateUtil.currentSession();
@@ -30,7 +49,7 @@ public class DocDaoHibernate implements DocDao
 		List<Doc> docs = sess.createQuery("from Doc where docName=:name").setString("name", name).list();
 		tx.commit();
 		// HibernateUtil.closeSession();
-		if (docs.size() >= 0)
+		if (docs.size() > 0)
 		{
 			return (Doc) docs.get(0);
 		}
@@ -47,6 +66,17 @@ public class DocDaoHibernate implements DocDao
 		sess.flush();
 		tx.commit();
 	}
+
+	@Override
+	public void update(Doc doc)
+	{
+		Session sess = HibernateUtil.currentSession();
+		Transaction tx = sess.beginTransaction();
+		sess.update(doc);
+		sess.flush();
+		tx.commit();
+	}
+
 	/*
 	 * @Override public Doc findById(long id) {
 	 * 
@@ -56,8 +86,6 @@ public class DocDaoHibernate implements DocDao
 	 * 
 	 * 
 	 * 
-	 * @Override public void update(Doc doc) {
-	 * getHibernateTemplate().update(doc); }
 	 * 
 	 * 
 	 * 
