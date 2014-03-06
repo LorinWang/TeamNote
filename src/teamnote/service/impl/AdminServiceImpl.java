@@ -75,7 +75,7 @@ public class AdminServiceImpl extends UserServiceImpl implements AdminService
 	{
 		User user = userDao.findByName(userName);
 		Menu menu = menuDao.findByName(menuName);
-		if (user == null || menu != null)
+		if (user == null || menu != null||!user.isUserIsAdmin())
 		{
 			return -1;
 		}
@@ -93,7 +93,7 @@ public class AdminServiceImpl extends UserServiceImpl implements AdminService
 	{
 		User user = userDao.findByName(userName);
 		Menu menu = menuDao.findByName(menuName);
-		if (user == null || menu == null||menu.getMenuName().equals("temp"))
+		if (user == null || menu == null||menu.getMenuName().equals("temp")||!user.isUserIsAdmin())
 		{
 			return -1;
 		}

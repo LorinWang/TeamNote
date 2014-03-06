@@ -139,7 +139,7 @@ public class UserServiceImpl implements UserService
 		menu.getMenuUnfoldUsers().add(user);
 		menuDao.save(menu);
 		return menu.getMenuDocs();
-		
+
 	}
 
 	@Override
@@ -227,6 +227,10 @@ public class UserServiceImpl implements UserService
 
 	public static boolean judgeMenuP(User user, Menu menu, char p)
 	{
+		if (user.isUserIsAdmin())
+		{
+			return true;
+		}
 		if (p == 'r')
 		{
 			if (menu.getMenuP().charAt(6) == p)
@@ -281,6 +285,10 @@ public class UserServiceImpl implements UserService
 
 	public static boolean judgeDocP(User user, Doc doc, char p)
 	{
+		if (user.isUserIsAdmin())
+		{
+			return true;
+		}
 		if (p == 'r')
 		{
 			if (doc.getDocP().charAt(6) == p)
@@ -394,12 +402,12 @@ public class UserServiceImpl implements UserService
 				docDao.save(doc);
 				if (doc.getDocEditor() == user)
 				{
-					//System.out.println(user.getUserEditedDocs());
+					// System.out.println(user.getUserEditedDocs());
 					doc.setDocContent(docContent);
-					doc.setDocEditor(null);	
+					doc.setDocEditor(null);
 					docDao.save(doc);
 					user.getUserEditedDocs().remove(doc);
-					//System.out.println(user.getUserEditedDocs());
+					// System.out.println(user.getUserEditedDocs());
 					return 1;
 				}
 				return -3;
@@ -417,18 +425,16 @@ public class UserServiceImpl implements UserService
 		User docOwner = userDao.findByName(docOwnerName);
 		UserGroup docGroup = userGroupDao.findByName(docGroupName);
 		Menu docMenu = menuDao.findByName(docMenuName);
-		if (user == null || doc == null||docMenu==null)
+		if (user == null || doc == null || docMenu == null)
 		{
 			return -1;
 		}
-		
-		Doc tempDoc=docDao.findByName(docNewName);
-		if (!(docNewName.equals(doc.getDocName())) && tempDoc!= null&&tempDoc.getDocMenu()==doc.getDocMenu())
+
+		Doc tempDoc = docDao.findByName(docNewName);
+		if (!(docNewName.equals(doc.getDocName())) && tempDoc != null && tempDoc.getDocMenu() == doc.getDocMenu())
 		{
 			return -2;
 		}
-		
-		
 
 		if (judgeDocP(user, doc, 'x'))
 		{
@@ -438,7 +444,7 @@ public class UserServiceImpl implements UserService
 				docDao.save(doc);
 				if (doc.getDocModifier() == user)
 				{
-					//System.out.println(user.getUserModifiedDocs());
+					// System.out.println(user.getUserModifiedDocs());
 					if (docOwner != doc.getDocOwner())
 					{
 						doc.setDocOwner(docOwner);
@@ -455,14 +461,14 @@ public class UserServiceImpl implements UserService
 					{
 						doc.setDocP(docP);
 					}
-					if (doc.getDocMenu()!=docMenu)
+					if (doc.getDocMenu() != docMenu)
 					{
 						doc.setDocMenu(docMenu);
 					}
 					doc.setDocModifier(null);
 					docDao.save(doc);
 					user.getUserModifiedDocs().remove(doc);
-					//System.out.println(user.getUserModifiedDocs());
+					// System.out.println(user.getUserModifiedDocs());
 					return 1;
 				}
 				return -4;
