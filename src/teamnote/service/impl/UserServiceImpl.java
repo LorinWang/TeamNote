@@ -110,7 +110,7 @@ public class UserServiceImpl implements UserService
 		tempUser = userDao.findByNameAndPass(user);
 		if (tempUser != null && tempUser.isUserIsLogged() == false)
 		{
-			tempUser.setUserIsLogged(true);
+			//tempUser.setUserIsLogged(true);
 			if (tempUser.isUserIsAdmin() == true)
 			{
 				return LOGIN_ADM;

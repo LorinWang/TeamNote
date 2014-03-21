@@ -4,6 +4,12 @@ import java.util.List;
 
 public interface ITreeElement
 {
+	public long getId();
+	public void setId(long id);
+	
+	public boolean isMenu();
+	public void setMenu(boolean isMenu);
+	
 	public void setName(String name);
 
 	public String getName();

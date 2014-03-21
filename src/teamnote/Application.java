@@ -8,19 +8,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 
-import teamnote.action.CloseDocAction;
-import teamnote.action.CreateDocAction;
-import teamnote.action.CreateMenuAction;
-import teamnote.action.DeleteDocAction;
-import teamnote.action.DeleteMenuAction;
-import teamnote.action.EditDocAction;
-import teamnote.action.FoldMenuAction;
 import teamnote.action.LoginAction;
-import teamnote.action.ModifyDocAction;
-import teamnote.action.ModifyMenuAction;
-import teamnote.action.UnfoldMenuAction;
-import teamnote.action.ShowMenusAction;
-import teamnote.action.OpenDocAction;
 import teamnote.dialogs.LoginDialog;
 import teamnote.domain.User;
 
@@ -30,6 +18,7 @@ import teamnote.domain.User;
 public class Application implements IApplication
 {
 
+	public static User user=new User();
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -82,14 +71,14 @@ public class Application implements IApplication
 	public boolean preOpen()
 	{
 		LoginDialog ld = new LoginDialog(null);
-		User user = new User();
+		//User user = new User();
 		ld.setUser(user);
 		String result = null;
 		if (ld.open() == IDialogConstants.OK_ID)
 		{
 			LoginAction loginAction = new LoginAction();
 
-			ShowMenusAction showMenusAction=new ShowMenusAction();
+			/*ShowMenusAction showMenusAction=new ShowMenusAction();
 			
 			UnfoldMenuAction unfoldMenuAction=new UnfoldMenuAction();
 			
@@ -111,13 +100,16 @@ public class Application implements IApplication
 			
 			DeleteMenuAction deleteMenuAction=new DeleteMenuAction();
 			
-			ModifyMenuAction modifyMenuAction=new ModifyMenuAction();
+			ModifyMenuAction modifyMenuAction=new ModifyMenuAction();*/
 			
 			try
 			{
 				//用户登录
 				result = loginAction.execute(user);
-				System.out.println(result);
+				
+				
+				
+				
 				//显示目录
 				//String menuName=showMenusAction.execute(user.getUserName());
 				//System.out.println(menuName);
@@ -146,11 +138,10 @@ public class Application implements IApplication
 				//删除目录
 				//System.out.println(deleteMenuAction.execute(user.getUserName(), "menu1"));
 				//修改目录属性
-				System.out.println(modifyMenuAction.execute(user.getUserName(), "menu1", "menunew1","---------", "a1", null));
+				//System.out.println(modifyMenuAction.execute(user.getUserName(), "menu1", "menunew1","---------", "a1", null));
 			}
 			catch (Exception e)
 			{
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -161,6 +152,7 @@ public class Application implements IApplication
 		}
 		else
 		{
+			user.setUserName(result);
 			return true;
 		}
 

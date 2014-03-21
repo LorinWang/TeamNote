@@ -3,6 +3,8 @@ package teamnote.navigator.model;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.ui.ISharedImages;
+import org.eclipse.ui.PlatformUI;
 
 public class TreeViewerLabelProvider implements ILabelProvider
 {
@@ -38,8 +40,16 @@ public class TreeViewerLabelProvider implements ILabelProvider
 	@Override
 	public Image getImage(Object element)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		ITreeElement treeElement = (ITreeElement) element;
+		if (treeElement.isMenu())
+		{
+			return PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_OBJ_FOLDER);
+			
+		}
+		else 
+		{
+			return PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_OBJ_FILE);
+		}
 	}
 
 	@Override

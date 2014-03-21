@@ -46,13 +46,13 @@ public class LoginAction extends UserBaseAction
 		if (result == 1)
 		{
 			setTip("您已经成功登录系统");
-			return USR_RESULT;
+			return user.getUserName();
 		}
 		// 登录结果为经理
 		else if (result == 2)
 		{
 			setTip("您已经成功登录系统");
-			return ADM_RESULT;
+			return user.getUserName();
 		}
 		// 用户名和密码不匹配
 		else

@@ -42,6 +42,7 @@
             name="Navigator">
       </view>
    </extension>
+   
    <extension
          point="org.eclipse.ui.editors">
       <editor
@@ -52,5 +53,46 @@
       </editor>
    </extension>
    
-
+   <extension
+         point="org.eclipse.ui.views.properties.tabbed.propertyContributor">
+      <propertyContributor
+            contributorId="teamnote.contributor">
+          <propertyCategory category="sample"/>
+      </propertyContributor>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
+      <propertyTabs
+            contributorId="teamnote.contributor">
+         <propertyTab
+               category="sample"
+               id="docContentTab"
+               label="文档内容">
+         </propertyTab>
+         <propertyTab
+               category="sample"
+               id="docPropertyTab"
+               label="文档属性">
+         </propertyTab>
+         <propertyTab
+               category="sample"
+               id="menuPropertyTab"
+               label="目录属性">
+         </propertyTab>
+      </propertyTabs>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.views.properties.tabbed.propertySections">
+      <propertySections
+            contributorId="teamnote.contributor">
+         <propertySection
+               class="teamnote.section.docContentSection"
+               filter="teamnote.properties.filters.docFilter"
+               id="docContentSection"
+               tab="docContentTab">
+         </propertySection>
+      </propertySections>
+   </extension>
 </plugin>

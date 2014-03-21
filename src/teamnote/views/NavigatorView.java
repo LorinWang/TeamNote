@@ -12,13 +12,17 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.part.DrillDownAdapter;
 import org.eclipse.ui.part.ViewPart;
+import org.eclipse.ui.views.properties.IPropertySheetPage;
+import org.eclipse.ui.views.properties.tabbed.ITabbedPropertySheetPageContributor;
+import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
+import teamnote.Application;
 import teamnote.navigator.model.NavigatorEntityElement;
 import teamnote.navigator.model.NavigatorEntityFactory;
 import teamnote.navigator.model.TreeViewerContentProvider;
 import teamnote.navigator.model.TreeViewerLabelProvider;
 
-public class NavigatorView extends ViewPart
+public class NavigatorView extends ViewPart implements ITabbedPropertySheetPageContributor
 {
 	private TreeViewer tv;
 	private DrillDownAdapter drillDownAdapter;
@@ -29,17 +33,17 @@ public class NavigatorView extends ViewPart
 		tv = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
 		tv.setContentProvider(new TreeViewerContentProvider());
 		tv.setLabelProvider(new TreeViewerLabelProvider());
-		tv.setInput(NavigatorEntityFactory.TreeEntityElement());
+		tv.setInput(NavigatorEntityFactory.TreeEntityElement(Application.user));
 		// fillViewToolBarAction();
 		// fillViewToolBarContextMenu();
 		hookDoubleClickAction();
+		getSite().setSelectionProvider(tv);
 	}
 
 	private void hookDoubleClickAction()
 	{
 		tv.addDoubleClickListener(new IDoubleClickListener()
 		{
-
 			@Override
 			public void doubleClick(DoubleClickEvent event)
 			{
@@ -81,4 +85,18 @@ public class NavigatorView extends ViewPart
 
 	}
 
+	// Ö§³Ötabbed property view
+	@Override
+	public String getContributorId()
+	{
+		return "teamnote.contributor";
+	}
+
+	@Override
+	public Object getAdapter(Class adapter)
+	{
+		if (adapter == IPropertySheetPage.class)
+			return new TabbedPropertySheetPage(this);
+		return super.getAdapter(adapter);
+	}
 }

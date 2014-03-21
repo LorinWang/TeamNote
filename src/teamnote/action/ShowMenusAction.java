@@ -3,27 +3,18 @@ package teamnote.action;
 import java.util.List;
 
 import teamnote.domain.Menu;
-import teamnote.domain.User;
 
 public class ShowMenusAction extends UserBaseAction
 {
 
-	public String execute(String userName) throws Exception
+	public List<Menu> execute(String userName) throws Exception
 	{
 		List<Menu> menus = userService.showMenus(userName);
-		if (menus != null)
+		if (menus==null||menus.size()==0)
 		{
-			for (Menu menu : menus)
-			{
-				System.out.println(menu.getMenuName());
-			}
-			return menus.get(0).getMenuName();
+			return null;
 		}
-		else
-		{
-			System.out.println("Пе");
-			return "error";
-		}
+		return menus;
 
 	}
 
