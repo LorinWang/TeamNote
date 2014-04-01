@@ -41,7 +41,7 @@
         </set>
         
         <!-- 目录用户展开表 多对多 -->
-        <set name="menuUnfoldUsers" table="MENU_USER_UNFOLD">
+        <set name="menuUnfoldUsers" inverse="true" cascade="save-update" table="MENU_USER_UNFOLD">
             <key>
                 <column name="MENUID" />
             </key>

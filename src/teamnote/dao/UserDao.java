@@ -18,6 +18,8 @@ public interface UserDao
 	void update(User user);
 	
 	long save(User user);
+	
+	List<User> findAll();
 	/*User findByMenuOwner(Menu menu);
 
 	User findByDocOwner(Doc doc);

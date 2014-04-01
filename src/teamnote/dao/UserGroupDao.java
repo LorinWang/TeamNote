@@ -10,6 +10,8 @@ import teamnote.domain.UserGroup;
 public interface UserGroupDao
 {
 	UserGroup findByName(String name);
+	
+	List<UserGroup> findAll();
 	/*UserGroup findById(long id);
 
 	

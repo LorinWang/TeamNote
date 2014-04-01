@@ -41,7 +41,7 @@
         </many-to-one>
         
         <!-- 用户读文档 多对多-->
-        <set name="docReadUsers" table="USER_DOCS_READ">
+        <set name="docReadUsers" inverse="true" cascade="save-update" table="USER_DOCS_READ">
             <key>
                 <column name="DOCID" />
             </key>

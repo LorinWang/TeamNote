@@ -22,15 +22,31 @@ public class UserGroupDaoHibernate implements UserGroupDao
 		Transaction tx = sess.beginTransaction();
 		List userGroups = sess.createQuery("from UserGroup where groupName=:name").setString("name", name).list();
 		tx.commit();
-		// HibernateUtil.closeSession();
 		if (userGroups.size() > 0)
 		{
 			return (UserGroup) userGroups.get(0);
 		}
 		else
 			return null;
-
 	}
+	
+	public List<UserGroup> findAll()
+	{
+		Session sess = HibernateUtil.currentSession();
+		Transaction tx = sess.beginTransaction();
+		List userGroups = sess.createQuery("from UserGroup").list();
+		tx.commit();
+		if (userGroups.size() > 0)
+		{
+			return userGroups;
+		}
+		else
+		{
+			return null;
+		}
+	}
+	
+	
 	/*
 	 * @Override public UserGroup findById(long id) { return
 	 * getHibernateTemplate().get(UserGroup.class, id); }

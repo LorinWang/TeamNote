@@ -32,7 +32,24 @@ public class MenuDaoHibernate implements MenuDao
 			return null;
 		}
 	}
-
+	
+	@Override
+	public Menu findById(long id)
+	{
+		Session sess = HibernateUtil.currentSession();
+		Transaction tx = sess.beginTransaction();
+		List<Menu> menus = sess.createQuery("from Menu where menuId=:id").setLong("id", id).list();
+		tx.commit();
+		// HibernateUtil.closeSession();
+		if (menus.size() > 0)
+		{
+			return (Menu) menus.get(0);
+		}
+		else
+		{
+			return null;
+		}
+	}
 	@Override
 	public Menu findByName(String name)
 	{
@@ -117,5 +134,7 @@ public class MenuDaoHibernate implements MenuDao
 	 * (List<Menu>) getHibernateTemplate().find("from Menu as m where " +
 	 * "m.menuGroup = ?", userGroup); }
 	 */
+
+	
 
 }

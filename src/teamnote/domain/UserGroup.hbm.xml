@@ -15,7 +15,7 @@
 		</property>
 
 		<!-- 用户及用户组 多对多 -->
-		<set name="groupUsers" table="USER_USERGROUP">
+		<set name="groupUsers" inverse="true" cascade="save-update" table="USER_USERGROUP">
 			<key>
 				<column name="GROUPID" />
 			</key>

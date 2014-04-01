@@ -71,6 +71,7 @@
                label="文档内容">
          </propertyTab>
          <propertyTab
+         	   afterTab="docContentTab"
                category="sample"
                id="docPropertyTab"
                label="文档属性">
@@ -92,6 +93,12 @@
                filter="teamnote.properties.filters.docFilter"
                id="docContentSection"
                tab="docContentTab">
+         </propertySection>
+         <propertySection
+               class="teamnote.section.docPropertySection"
+               filter="teamnote.properties.filters.docFilter"
+               id="docPropertySection"
+               tab="docPropertyTab">
          </propertySection>
       </propertySections>
    </extension>

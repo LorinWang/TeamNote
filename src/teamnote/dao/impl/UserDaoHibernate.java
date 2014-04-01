@@ -85,6 +85,25 @@ public class UserDaoHibernate implements UserDao
 		tx.commit();
 		return (long) result;
 	}
+	
+	public List<User> findAll()
+	{
+		Session sess = HibernateUtil.currentSession();
+		Transaction tx = sess.beginTransaction();
+		List users = sess.createQuery("from User").list();
+		tx.commit();
+		if (users.size() > 0)
+		{
+			return users;
+		}
+		else
+		{
+			return null;
+		}
+	}
+	
+	
+	
 /*
 	@Override
 	public User findByMenuOwner(Menu menu)

@@ -14,8 +14,8 @@ public interface MenuDao
 	long save(Menu menu);
 	void update(Menu menu);
 	void delete(Menu menu);
-	/*Menu findById(long id);
-
+	Menu findById(long id);
+/*
 	
 
 	Menu findByDoc(Doc doc);
