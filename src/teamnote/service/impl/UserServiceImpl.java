@@ -400,7 +400,6 @@ public class UserServiceImpl implements UserService
 	 * return -3; } return -2; }
 	 */
 
-	@Override
 	public int modifyDoc(String userName, long docId, String docNewName, String docP, String docOwnerName, String docGroupName, String docMenuName)
 	{
 		User user = userDao.findByName(userName);
@@ -535,13 +534,13 @@ public class UserServiceImpl implements UserService
 	}
 
 	@Override
-	public Doc startModifyDoc(String userName, long docId)
+	public int startModifyDoc(String userName, long docId)
 	{
 		User user = userDao.findByName(userName);
 		Doc doc = docDao.findById(docId);
 		if (user == null || doc == null)
 		{
-			return null;
+			return -1;
 		}
 		if (judgeDocP(user, doc, 'x'))
 		{
@@ -551,13 +550,34 @@ public class UserServiceImpl implements UserService
 				docDao.update(doc);
 				if (doc.getDocModifier() == user)
 				{
-					return doc;
+					return 1;
 				}
-				return null;
+				return -3;
 			}
-			return null;
+			return -3;
 		}
-		return null;
+		return -2;
+	}
+
+	@Override
+	public int cancelModifyDoc(String userName, long docId)
+	{
+		User user = userDao.findByName(userName);
+		Doc doc = docDao.findById(docId);
+		if (user == null || doc == null)
+		{
+			return -1;
+		}
+		if (doc.getDocModifier() != null)
+		{
+			doc.setDocModifier(null);
+			docDao.update(doc);
+		}
+		if (user.getUserModifiedDocs().contains(doc))
+		{
+			user.getUserModifiedDocs().remove(doc);
+		}
+		return 1;
 	}
 
 	@Override
@@ -577,4 +597,34 @@ public class UserServiceImpl implements UserService
 	{
 		return userGroupDao.findAll();
 	}
+
+	@Override
+	public int finishModifyDoc(String userName, long docId, String docName, String docOwnerName, String docMenuName, String docGroupName, String docP)
+	{
+		User user = userDao.findByName(userName);
+		Doc doc = docDao.findById(docId);
+		if (user == null || doc == null)
+		{
+			return -1;
+		}
+		if (judgeDocP(user, doc, 'x'))
+		{
+			if (doc.getDocModifier() == user)
+			{
+				doc.setDocName(docName);
+				doc.setDocOwner(userDao.findByName(docOwnerName));
+				doc.setDocMenu(menuDao.findByName(docMenuName));
+				doc.setDocGroup(userGroupDao.findByName(docGroupName));
+				doc.setDocP(docP);
+				doc.setDocModifier(null);
+				docDao.update(doc);
+				user.getUserModifiedDocs().remove(doc);
+				return 1;
+			}
+			return -3;
+		}
+		return -2;
+
+	}
+
 }

@@ -44,17 +44,17 @@ public interface UserService
 
 	// 修改文档内容
 	int startEditDoc(String userName, long docId);
-
 	int finishEditDoc(String userName, long docId, String docContent);
-
 	int cancelEditDoc(String userName, long docId);
+	
+	//修改文档内容
+	int startModifyDoc(String userName,long docId);
+	int finishModifyDoc(String userName, long docId,String docName,String docOwnerName,String docMenuName,String docGroupName,String docP);
+	int cancelModifyDoc(String userName, long docId);
 
-	// 修改文档属性
-	int modifyDoc(String userName, long docId, String docNewName, String docP, String docOwnerName, String docGroupName, String docMenuName);
 	// 删除文档
 
-	//得到doc
-	Doc startModifyDoc(String userName,long docId);
+
 	
 	List<Menu> getAllMenus();
 	List<User> getAllUsers();
