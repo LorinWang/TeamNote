@@ -109,4 +109,33 @@
          </propertySection>
       </propertySections>
    </extension>
+   
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="teamnote.application"
+            name="TeamNote">
+         <property
+               name="appName"
+               value="TeamNote">
+         </property>
+         <property
+               name="windowImages"
+               value="icons/Doc.png">
+         </property>
+         
+         <!--
+         <property
+               name="aboutImage"
+               value="icons/about.gif">
+         </property>
+         <property
+               name="aboutText"
+               value="帮助信息：&#x0A;版本：1.0.0&#x0A;作者：sky&#x0A;发布日期：2012-06-14">
+         </property>
+         -->
+         
+      </product>
+   </extension>
 </plugin>

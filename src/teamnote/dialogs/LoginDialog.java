@@ -11,8 +11,11 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 
+import teamnote.Application;
 import teamnote.domain.User;
+import teamnote.utils.ImageKeys;
 
 public class LoginDialog extends TitleAreaDialog
 {
@@ -43,6 +46,7 @@ public class LoginDialog extends TitleAreaDialog
 		newShell.setText("ÓÃ»§µÇÂ¼");
 		newShell.setSize(500, 200);
 		newShell.setLocation(260, 260);
+		newShell.setImage(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID, ImageKeys.LOGIN).createImage());
 	}
 
 	@Override

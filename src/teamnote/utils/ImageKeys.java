@@ -2,6 +2,8 @@ package teamnote.utils;
 
 public interface ImageKeys
 {
+	public static final String LOGIN = "icons/Login.png";
+	
 	public static final String MENU = "icons/Menu.png";
 	public static final String CREATEMENU="icons/CreateMenu.png";
 	public static final String DELETEMENU="icons/DeleteMenu.png";
