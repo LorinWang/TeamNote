@@ -19,7 +19,7 @@
             id="TeamNote.perspective">
       </perspective>
    </extension>
-   
+<!--   
    <extension
          point="org.eclipse.ui.menus">
       <menuContribution
@@ -33,13 +33,20 @@
          </menu>
       </menuContribution>
    </extension>
-   
+ -->
    <extension
          point="org.eclipse.ui.views">
       <view
             class="teamnote.views.NavigatorView"
+            icon="icons/Menu.png"
             id="TeamNote.views.NavigatorView"
-            name="Navigator">
+            name="文档管理">
+      </view>
+      <view
+            class="teamnote.views.NavigatorView2"
+            icon="icons/UserGroup.png"
+            id="TeamNote.views.NavigatorView2"
+            name="用户管理">
       </view>
    </extension>
    

@@ -17,14 +17,10 @@ import teamnote.domain.User;
  */
 public class Application implements IApplication
 {
-
+	public static final String PLUGIN_ID = "TeamNote";
+	
 	public static User user=new User();
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.equinox.app.IApplication#start(org.eclipse.equinox.app.
-	 * IApplicationContext)
-	 */
+	
 	public Object start(IApplicationContext context)
 	{
 		Display display = PlatformUI.createDisplay();
