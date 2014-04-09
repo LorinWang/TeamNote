@@ -1,5 +1,9 @@
 package teamnote.action;
 
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Shell;
+
 public class DeleteDocAction extends UserBaseAction
 {
 	public String execute(String userName, long docId) throws Exception
@@ -7,6 +11,12 @@ public class DeleteDocAction extends UserBaseAction
 		long result = userService.deleteDoc(userName, docId);
 		if (result == -1)
 		{
+			MessageBox msgBox = new MessageBox(new Shell(), SWT.ICON_ERROR);
+			msgBox.setMessage("我勒个去");
+			if(msgBox.open()==SWT.YES)
+			{
+				
+			}
 			return "用户、目录或文件名不存在";
 		}
 		if (result == -2)

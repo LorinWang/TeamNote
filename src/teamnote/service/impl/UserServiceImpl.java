@@ -203,9 +203,15 @@ public class UserServiceImpl implements UserService
 	@Override
 	public int deleteDoc(String userName, long docId)
 	{
-		User user = userDao.findByName(userName);
-		Doc doc = docDao.findById(docId);
-		Menu menu = doc.getDocMenu();
+		User user = null;
+		Doc doc = null;
+		Menu menu = null;
+		user = userDao.findByName(userName);
+		doc = docDao.findById(docId);
+		if (doc != null)
+		{
+			menu = doc.getDocMenu();
+		}
 		if (user == null || menu == null || doc == null)
 		{
 			return -1;

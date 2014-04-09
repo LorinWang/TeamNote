@@ -91,15 +91,6 @@ public class DeleteDocViewAction extends Action implements ISelectionListener, I
     		{
     			e.printStackTrace();
     		}
-        } 
-		
-		/*MessageBox msgBox = new MessageBox(new Shell(), SWT.ICON_ERROR);
-		msgBox.setMessage("Œ“¿’∏ˆ»•");
-		if(msgBox.open()==SWT.YES)
-		{
-			
-		}*/
-		
+        } 		
 	}
-
 }
