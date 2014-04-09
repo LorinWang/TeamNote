@@ -19,4 +19,7 @@ public interface ImageKeys
 	public static final String USERGROUP ="icons/UserGroup.png";
 	public static final String CREATEUSERGROUP="icons/CreateUserGroup.png";
 	public static final String DELETEUSERGROUP="icons/DeleteUserGroup.png";
+	public static final String INUSERGROUP="icons/InUserGroup.png";
+	public static final String OUTUSERGROUP="icons/OutUserGroup.png";
+	
 }

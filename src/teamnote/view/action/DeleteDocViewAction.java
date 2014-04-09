@@ -3,6 +3,9 @@ package teamnote.view.action;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -76,14 +79,27 @@ public class DeleteDocViewAction extends Action implements ISelectionListener, I
 	@Override
 	public void run()
 	{
-		try
+		MessageBox msgBox = new MessageBox(new Shell(), SWT.YES|SWT.NO|SWT.ICON_QUESTION); 
+        msgBox.setText("删除文档"); 
+        msgBox.setMessage("确定删除文档？"); 
+        if(msgBox.open()==SWT.YES){ 
+        	try
+    		{
+    			deleteDocAction.execute(Application.user.getUserName(), docId);
+    		}
+    		catch (Exception e)
+    		{
+    			e.printStackTrace();
+    		}
+        } 
+		
+		/*MessageBox msgBox = new MessageBox(new Shell(), SWT.ICON_ERROR);
+		msgBox.setMessage("我勒个去");
+		if(msgBox.open()==SWT.YES)
 		{
-			deleteDocAction.execute(Application.user.getUserName(), docId);
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+			
+		}*/
+		
 	}
 
 }

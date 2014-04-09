@@ -3,7 +3,6 @@ package teamnote.view.action;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.window.Window;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -11,30 +10,27 @@ import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 import teamnote.Application;
-import teamnote.action.CreateDocAction;
-import teamnote.dialogs.CreateDocDialog;
-import teamnote.navigator.model.ITreeElement;
 import teamnote.utils.ImageKeys;
 
-public class CreateUserGroupViewAction extends Action implements ISelectionListener, IWorkbenchAction
+public class InUserGroupViewAction extends Action implements ISelectionListener, IWorkbenchAction
 {
 	// final类型的必须在创建类的时候就给他初始值
 	// 或者在构造方法里面就给他赋初始值
 	private final IWorkbenchWindow window;
-	public final static String ID = "createUserGroup";
+	public final static String ID = "deleteUser";
 	private IStructuredSelection selection;
 	
 	// 构造函数
-	public CreateUserGroupViewAction(IWorkbenchWindow window)
+	public InUserGroupViewAction(IWorkbenchWindow window)
 	{
 		this.window = window;
 		// 设置该动作的ID
 		this.setId(ID);
 		// 指定菜单名称
-		this.setText("新建用户组");
+		this.setText("用户入组");
 		// 鼠标放到菜单名称上的提示信息
-		this.setToolTipText("新建用户组");
-		this.setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID, ImageKeys.CREATEUSERGROUP));
+		this.setToolTipText("用户入组");
+		this.setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID, ImageKeys.INUSERGROUP));
 		window.getSelectionService().addSelectionListener(this);
 	}
 
@@ -47,7 +43,7 @@ public class CreateUserGroupViewAction extends Action implements ISelectionListe
 	@Override
 	public void selectionChanged(IWorkbenchPart part, ISelection selection1)
 	{
-		this.setEnabled(true);
+		this.setEnabled(false);
 	}
 
 	@Override

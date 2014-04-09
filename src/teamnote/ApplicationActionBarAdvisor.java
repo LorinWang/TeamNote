@@ -19,6 +19,8 @@ import teamnote.view.action.DeleteDocViewAction;
 import teamnote.view.action.DeleteMenuViewAction;
 import teamnote.view.action.DeleteUserGroupViewAction;
 import teamnote.view.action.DeleteUserViewAction;
+import teamnote.view.action.InUserGroupViewAction;
+import teamnote.view.action.OutUserGroupViewAction;
 import teamnote.view.action.RefreshDocViewAction;
 import teamnote.view.action.RefreshUserViewAction;
 
@@ -40,6 +42,9 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor
 
 	private static IWorkbenchAction createUserGroupViewAction;
 	private static IWorkbenchAction deleteUserGroupViewAction;
+	
+	private static IWorkbenchAction inUserGroupViewAction;
+	private static IWorkbenchAction outUserGroupViewAction;
 
 	private static IWorkbenchAction refreshDocViewAction;
 	private static IWorkbenchAction refreshUserViewAction;
@@ -73,6 +78,11 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor
 		register(createUserGroupViewAction);
 		deleteUserGroupViewAction = new DeleteUserGroupViewAction(window);
 		register(deleteUserGroupViewAction);
+		
+		inUserGroupViewAction = new InUserGroupViewAction(window);
+		register(inUserGroupViewAction);
+		outUserGroupViewAction = new OutUserGroupViewAction(window);
+		register(outUserGroupViewAction);
 
 		refreshDocViewAction = new RefreshDocViewAction(window);
 		register(refreshDocViewAction);
@@ -95,13 +105,16 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor
 		menuManager.add(new Separator());
 		menuManager.add(createDocViewAction);
 		menuManager.add(deleteDocViewAction);
-		
+		menuManager1.add(new Separator());
 		menuManager1.add(createUserViewAction);
 		menuManager1.add(deleteUserViewAction);
 		menuManager1.add(new Separator());
 		menuManager1.add(createUserGroupViewAction);
 		menuManager1.add(deleteUserGroupViewAction);
-
+		menuManager1.add(new Separator());
+		menuManager1.add(inUserGroupViewAction);
+		menuManager1.add(outUserGroupViewAction);
+		menuManager1.add(new Separator());
 		menuManager2.add(refreshDocViewAction);
 		menuManager2.add(refreshUserViewAction);
 
@@ -126,6 +139,9 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor
 		toolbar.add(deleteUserViewAction);
 		toolbar.add(createUserGroupViewAction);
 		toolbar.add(deleteUserGroupViewAction);
+		toolbar.add(new Separator());
+		toolbar.add(inUserGroupViewAction);
+		toolbar.add(outUserGroupViewAction);
 		toolbar.add(new Separator());
 		toolbar.add(refreshDocViewAction);
 		toolbar.add(refreshUserViewAction);

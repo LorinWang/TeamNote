@@ -43,7 +43,7 @@ public class CreateUserViewAction extends Action implements ISelectionListener, 
 	@Override
 	public void selectionChanged(IWorkbenchPart part, ISelection selection1)
 	{
-		this.setEnabled(false);
+		this.setEnabled(true);
 	}
 
 	@Override
