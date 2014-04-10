@@ -31,7 +31,7 @@ public class ApplicationWorkbenchWindowAdvisor<MWindow> extends WorkbenchWindowA
 		configurer.setInitialSize(new Point(screenSize.width, screenSize.height));
 		configurer.setShowCoolBar(true);
 		configurer.setShowStatusLine(false);
-		configurer.setTitle("多人协同云笔记 1.0 by 王翊名");
+		configurer.setTitle("多人协同笔记系统 1.0 by 王翊名");
 		configurer.setShellStyle(SWT.MIN | SWT.CLOSE|SWT.MAX);
 	}
 

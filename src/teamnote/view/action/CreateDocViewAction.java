@@ -35,9 +35,9 @@ public class CreateDocViewAction extends Action implements ISelectionListener, I
 		// 设置该动作的ID
 		this.setId(ID);
 		// 指定菜单名称
-		this.setText("新建文档");
+		this.setText("新建笔记");
 		// 鼠标放到菜单名称上的提示信息
-		this.setToolTipText("新建文档");
+		this.setToolTipText("新建笔记");
 		// 设置该动作显示的图标
 		this.setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID, ImageKeys.CREATEDOC));
 		// 添加监听(该动作注册的是选择监听，窗口中的选择改变时会调用selectionChanged()方法)

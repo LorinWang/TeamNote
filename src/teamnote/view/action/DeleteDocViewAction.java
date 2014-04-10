@@ -34,8 +34,8 @@ public class DeleteDocViewAction extends Action implements ISelectionListener, I
 		super();
 		this.window = window;
 		this.setId(ID);
-		this.setText("删除文档");
-		this.setToolTipText("删除文档");
+		this.setText("删除笔记");
+		this.setToolTipText("删除笔记");
 		this.setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Application.PLUGIN_ID, ImageKeys.DELETEDOC));
 		window.getSelectionService().addSelectionListener(this);
 	}
@@ -80,8 +80,8 @@ public class DeleteDocViewAction extends Action implements ISelectionListener, I
 	public void run()
 	{
 		MessageBox msgBox = new MessageBox(new Shell(), SWT.YES|SWT.NO|SWT.ICON_QUESTION); 
-        msgBox.setText("删除文档"); 
-        msgBox.setMessage("确定删除文档？"); 
+        msgBox.setText("删除笔记"); 
+        msgBox.setMessage("确定删除该笔记？"); 
         if(msgBox.open()==SWT.YES){ 
         	try
     		{

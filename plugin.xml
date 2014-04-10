@@ -40,7 +40,7 @@
             class="teamnote.views.NavigatorView"
             icon="icons/Menu.png"
             id="TeamNote.views.NavigatorView"
-            name="文档管理">
+            name="笔记管理">
       </view>
       <view
             class="teamnote.views.NavigatorView2"
@@ -50,15 +50,7 @@
       </view>
    </extension>
    
-   <extension
-         point="org.eclipse.ui.editors">
-      <editor
-            class="teamnote.editors.DocEditor"
-            default="false"
-            id="TeamNote.Editors.DocEditor"
-            name="文本编辑器">
-      </editor>
-   </extension>
+   
    
    <extension
          point="org.eclipse.ui.views.properties.tabbed.propertyContributor">
@@ -75,13 +67,13 @@
          <propertyTab
                category="sample"
                id="docContentTab"
-               label="文档内容">
+               label="笔记内容">
          </propertyTab>
          <propertyTab
          	   afterTab="docContentTab"
                category="sample"
                id="docPropertyTab"
-               label="文档属性">
+               label="笔记属性">
          </propertyTab>
          <propertyTab
                category="sample"

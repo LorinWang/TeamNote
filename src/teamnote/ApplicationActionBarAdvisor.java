@@ -96,7 +96,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor
 	{
 		super.fillMenuBar(menuBar);
 		// 创建菜单
-		MenuManager menuManager = new MenuManager("目录/文档操作", "目录/文档操作");
+		MenuManager menuManager = new MenuManager("目录/笔记操作", "目录/笔记操作");
 		MenuManager menuManager1 = new MenuManager("用户组/用户操作", "用户组/用户操作");
 		MenuManager menuManager2 = new MenuManager("视图操作", "视图操作");
 		// 在菜单里面添加操作

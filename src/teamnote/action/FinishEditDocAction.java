@@ -19,7 +19,7 @@ public class FinishEditDocAction extends UserBaseAction
 		}
 		if (result == 1)
 		{
-			return "修改文档成功";
+			return "SUCCESS";
 		}
 		else
 		{

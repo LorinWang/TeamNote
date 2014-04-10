@@ -17,7 +17,6 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import teamnote.Application;
 import teamnote.action.CancelEditDocAction;
 import teamnote.action.CloseDocAction;
-import teamnote.action.DeleteDocAction;
 import teamnote.action.FinishEditDocAction;
 import teamnote.action.OpenDocAction;
 import teamnote.action.StartEditDocAction;
@@ -32,7 +31,6 @@ public class docContentSection extends AbstractPropertySection
 	private Button editButton = null;
 	private Button okButton = null;
 	private Button cancelButton = null;
-	private Button deleteButton = null;
 
 	private ITreeElement iTreeElement = null;
 	private Long docId = null;
@@ -49,8 +47,6 @@ public class docContentSection extends AbstractPropertySection
 	private FinishEditDocAction finishEditDocAction = new FinishEditDocAction();
 	private CancelEditDocAction cancelEditDocAction = new CancelEditDocAction();
 	
-	private DeleteDocAction deleteDocAction =new DeleteDocAction();
-
 	private SelectionAdapter editButtonAdapter = new SelectionAdapter()
 	{
 		public void widgetSelected(SelectionEvent e)
@@ -66,7 +62,6 @@ public class docContentSection extends AbstractPropertySection
 					docText.setEditable(true);
 					okButton.setEnabled(true);
 					cancelButton.setEnabled(true);
-					deleteButton.setEnabled(false);
 				}
 			}
 			catch (Exception e1)
@@ -90,7 +85,6 @@ public class docContentSection extends AbstractPropertySection
 					docText.setEditable(false);
 					okButton.setEnabled(false);
 					cancelButton.setEnabled(false);
-					deleteButton.setEnabled(true);
 				}
 			}
 			catch (Exception e1)
@@ -115,7 +109,6 @@ public class docContentSection extends AbstractPropertySection
 					docText.setEditable(false);
 					okButton.setEnabled(false);
 					cancelButton.setEnabled(false);
-					deleteButton.setEnabled(true);
 				}
 			}
 			catch (Exception e1)
@@ -126,35 +119,13 @@ public class docContentSection extends AbstractPropertySection
 		}
 	};
 	
-	private SelectionAdapter deleteButtonAdapter = new SelectionAdapter()
-	{
-		public void widgetSelected(SelectionEvent e)
-		{
-			try
-			{
-				result = deleteDocAction.execute(Application.user.getUserName(),docId);
-				if (result.equals("SUCCESS"))
-				{
-					editButton.setEnabled(true);
-					docText.setEnabled(false);
-					docText.setEditable(false);
-					okButton.setEnabled(false);
-					cancelButton.setEnabled(false);
-					deleteButton.setEnabled(true);
-				}
-			}
-			catch (Exception e1)
-			{
-				e1.printStackTrace();
-			}
-		}
-	};
+	
 
 	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage)
 	{
 		super.createControls(parent, aTabbedPropertySheetPage);
 		Composite composite = getWidgetFactory().createFlatFormComposite(parent);
-
+		
 		editButton = getWidgetFactory().createButton(composite, "±à¼­", SWT.NONE);
 		FormData data = new FormData();
 		data.left = new FormAttachment(0, 0);
@@ -184,21 +155,14 @@ public class docContentSection extends AbstractPropertySection
 		cancelButton.setEnabled(false);
 		cancelButton.addSelectionListener(cancelButtonAdapter);
 
-		deleteButton = getWidgetFactory().createButton(composite, "É¾³ýÎÄµµ", SWT.NONE);
-		data = new FormData();
-		data.left = new FormAttachment(80, 0);
-		data.right = new FormAttachment(100, 0);
-		data.top = new FormAttachment(0, 0);
-		data.bottom = new FormAttachment(0, 30);
-		deleteButton.setLayoutData(data);
-		deleteButton.addSelectionListener(deleteButtonAdapter);
 
 		docText = getWidgetFactory().createText(composite, "test text", SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
 		data = new FormData();
 		data.left = new FormAttachment(0, 0);
 		data.right = new FormAttachment(100, 0);
 		data.top = new FormAttachment(0, 35);
-		data.bottom = new FormAttachment(0, 100);
+		//data.bottom=new FormAttachment(100, 0);
+		data.bottom = new FormAttachment(cancelButton, 500,SWT.BOTTOM);
 		docText.setLayoutData(data);
 		docText.setEditable(false);
 		docText.setEnabled(false);
@@ -248,8 +212,6 @@ public class docContentSection extends AbstractPropertySection
 					try
 					{
 						closeDocAction.execute(Application.user.getUserName(), docId);
-						// System.out.println(closeDocAction.execute(Application.user.getUserName(),
-						// docId));
 					}
 					catch (Exception e)
 					{

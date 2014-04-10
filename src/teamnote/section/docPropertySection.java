@@ -229,7 +229,7 @@ public class docPropertySection extends AbstractPropertySection
 		cancelButton.setEnabled(false);
 		cancelButton.addSelectionListener(cancelButtonAdapter);
 
-		docNameLabel = getWidgetFactory().createLabel(composite, "文档名");
+		docNameLabel = getWidgetFactory().createLabel(composite, "笔记名");
 		data = new FormData();
 		data.left = new FormAttachment(0, 0);
 		data.right = new FormAttachment(0, 80);
@@ -245,7 +245,7 @@ public class docPropertySection extends AbstractPropertySection
 		data.bottom = new FormAttachment(docNameLabel, 0, SWT.BOTTOM);
 		docNameText.setLayoutData(data);
 
-		docMenuLabel = getWidgetFactory().createLabel(composite, "文档目录");
+		docMenuLabel = getWidgetFactory().createLabel(composite, "笔记目录");
 		data = new FormData();
 		data.left = new FormAttachment(50, 0);
 		data.right = new FormAttachment(50, 80);
@@ -261,7 +261,7 @@ public class docPropertySection extends AbstractPropertySection
 		data.bottom = new FormAttachment(docMenuLabel, 0, SWT.BOTTOM);
 		docMenuCombo.setLayoutData(data);
 
-		docOwnerLabel = getWidgetFactory().createLabel(composite, "文档所有者");
+		docOwnerLabel = getWidgetFactory().createLabel(composite, "笔记所有者");
 		data = new FormData();
 		data.left = new FormAttachment(0, 0);
 		data.right = new FormAttachment(0, 80);
@@ -277,7 +277,7 @@ public class docPropertySection extends AbstractPropertySection
 		data.bottom = new FormAttachment(docOwnerLabel, 0, SWT.BOTTOM);
 		docOwnerCombo.setLayoutData(data);
 
-		docGroupLabel = getWidgetFactory().createLabel(composite, "文档所属组");
+		docGroupLabel = getWidgetFactory().createLabel(composite, "笔记所属组");
 		data = new FormData();
 		data.left = new FormAttachment(50, 0);
 		data.right = new FormAttachment(50, 80);
@@ -293,7 +293,7 @@ public class docPropertySection extends AbstractPropertySection
 		data.bottom = new FormAttachment(docGroupLabel, 0, SWT.BOTTOM);
 		docGroupCombo.setLayoutData(data);
 
-		Group group = getWidgetFactory().createGroup(composite, "文档权限");
+		Group group = getWidgetFactory().createGroup(composite, "笔记权限");
 		data = new FormData();
 		data.left = new FormAttachment(0, 0);
 		data.right = new FormAttachment(100, 0);
@@ -302,7 +302,7 @@ public class docPropertySection extends AbstractPropertySection
 		group.setLayoutData(data);
 		group.setLayout(composite.getLayout());
 
-		docOwnerPLabel = getWidgetFactory().createLabel(group, "文档所有者权限");
+		docOwnerPLabel = getWidgetFactory().createLabel(group, "笔记所有者权限");
 		data = new FormData();
 		data.left = new FormAttachment(0, 0);
 		data.right = new FormAttachment(20, 0);
@@ -333,7 +333,7 @@ public class docPropertySection extends AbstractPropertySection
 		data.bottom = new FormAttachment(docOwnerPButtonW, 0, SWT.BOTTOM);
 		docOwnerPButtonX.setLayoutData(data);
 
-		docGroupPLabel = getWidgetFactory().createLabel(group, "文档所属组权限");
+		docGroupPLabel = getWidgetFactory().createLabel(group, "笔记所属组权限");
 		data = new FormData();
 		data.left = new FormAttachment(0, 0);
 		data.right = new FormAttachment(20, 0);
@@ -364,7 +364,7 @@ public class docPropertySection extends AbstractPropertySection
 		data.bottom = new FormAttachment(docGroupPButtonW, 0, SWT.BOTTOM);
 		docGroupPButtonX.setLayoutData(data);
 
-		docOtherPLabel = getWidgetFactory().createLabel(group, "文档所属组权限");
+		docOtherPLabel = getWidgetFactory().createLabel(group, "笔记所属组权限");
 		data = new FormData();
 		data.left = new FormAttachment(0, 0);
 		data.right = new FormAttachment(20, 0);
